@@ -5,7 +5,20 @@
 */
 
 // setup global ccd variables
-var xml_path = "/var/www/html/ccd_parser/data_sample/xml/ccd_tang.xml";
+var xml_path = "";
+
+// Get the xml path from the arguements
+process.argv.forEach(function (val, index, array) {
+  if (index==2)
+     xml_path = val;
+});
+
+// if arguement does not exist, exit script
+if (xml_path==null || xml_path=="")
+{
+  console.log("Please specify the ICD document that will be processed.");
+  process.exit(); 
+}
 
 // load the file system library
 var fs = require('fs');
