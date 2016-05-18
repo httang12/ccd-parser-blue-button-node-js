@@ -31,4 +31,11 @@ var xml = fs.readFileSync(xml_path, 'utf-8');
 var myRecord = BlueButton(xml);
 
 // Log the demographics data
-console.log(myRecord.data.demographics.json());
+//console.log(myRecord.data.demographics.json());
+//console.log(myRecord.data.results.json());
+
+
+// add this to elastic search!!!
+var esearch = require('./lib/elastic-search/ElasticSearchService');
+esearch.configService('localhost','9200');
+esearch.indexDocument(myRecord.data.demographics.json(),'ccd_patient','ccd_patient_demographics');
